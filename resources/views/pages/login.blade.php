@@ -34,5 +34,8 @@
     <div class="mb-3">
         <a class="btn btn-primary" href="{{ $gitHubLink }}">Login via GitHub</a>
     </div>
+    <div class="mb-3">
+        <a class="btn btn-primary" href="{{ $yahooLink }}">Login via Yahoo</a>
+    </div>
 @endsection
 

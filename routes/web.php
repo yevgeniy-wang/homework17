@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/oauth/github/callback', \App\Http\Controllers\Oauth\GitHubController::class)->name('oauth-github');
+Route::get('/oauth/yahoo/callback', \App\Http\Controllers\Oauth\YahooController::class)->name('oauth-yahoo');
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 

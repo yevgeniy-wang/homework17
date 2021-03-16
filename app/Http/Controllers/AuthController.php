@@ -23,14 +23,23 @@ class AuthController
 
         $gitHubLink .= '?'.http_build_query($parameters);
 
-        return view("pages.login", compact('gitHubLink'));
+        $yahooLink = 'https://api.login.yahoo.com/oauth2/request_auth';
+        $parameters = [
+            'client_id'     => env('OAUTH_YAHOO_CLIENT_ID'),
+            'redirect_uri'  => env('OAUTH_YAHOO_REDIRECT_URI'),
+            'response_type' => 'code',
+        ];
+
+        $yahooLink .= '?'.http_build_query($parameters);
+
+        return view("pages.login", compact('gitHubLink', 'yahooLink'));
     }
 
     public function handleLogin(Request $request)
     {
         $data = $request->validate([
             'email'    => ['required', 'email'],
-            'password' => ['required', 'min:8']
+            'password' => ['required', 'min:8'],
         ]);
 
         if (Auth::attempt($data)) {
@@ -43,8 +52,9 @@ class AuthController
 
             return redirect()->route('admin');
         }
+
         return back()->withErrors([
-            'password' => 'Incorrect email or password'
+            'password' => 'Incorrect email or password',
         ]);
     }
 
